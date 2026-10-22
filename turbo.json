@@ -1,0 +1,30 @@
+{
+    "$schema": "https://turbo.build/schema.json",
+    "ui": "tui",
+    "concurrency": "10",
+    "tasks": {
+        "dev": {
+            "cache": true,
+            "persistent": true
+        },
+        "build": {
+            "cache": true,
+            "persistent": false,
+            "dependsOn": ["^build"],
+            "outputs": ["dist/**"]
+        },
+        "build:fast": {
+            "cache": true,
+            "persistent": false,
+            "dependsOn": ["^build"],
+            "outputs": ["dist/**"]
+        },
+        "start": {
+            "cache": true
+        },
+        "ts:typecheck": {
+            "outputs": [],
+            "dependsOn": ["^ts:typecheck"]
+        }
+    }
+}

@@ -1,0 +1,69 @@
+{
+    "name": "intelligent-compact",
+    "version": "0.0.0",
+    "type": "module",
+    "private": true,
+    "description": "Intelligent compaction for claude-code using mod",
+    "keywords": [],
+    "author": "snowboy",
+    "license": "MIT",
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/freestylejs/intelligent-compact.git"
+    },
+    "bugs": {
+        "url": "https://github.com/freestylejs/intelligent-compact/issues"
+    },
+    "homepage": "https://github.com/freestylejs/intelligent-compact#readme",
+    "engines": {
+        "node": "^22.18.0 || ^24.11.0 || >=26.0.0",
+        "pnpm": ">=10.20.0"
+    },
+    "scripts": {
+        "dev": "turbo run build && turbo run dev",
+        "build": "turbo run build",
+        "build:clean": "pnpm reset:dist && turbo run build --force",
+        "build:fast": "turbo run build:fast",
+        "start": "turbo run start",
+        "test": "vitest",
+        "test:watch": "vitest --watch -u",
+        "test:coverage": "vitest run --coverage",
+        "test:ci": "pnpm sync:check && pnpm build && pnpm check && pnpm test:coverage",
+        "sync:toolchain": "freestyle-sync-toolchain --write",
+        "sync:check": "freestyle-sync-toolchain --check",
+        "verify:package": "publint packages/ic && attw --pack packages/ic && node scripts/verify-package.mjs",
+        "ts:typecheck": "turbo run ts:typecheck",
+        "ts:perf": "rimraf ts-perf && tsc --noEmit --generateTrace ts-perf",
+        "lint": "oxlint --fix --deny-warnings",
+        "format": "oxfmt .",
+        "check": "oxlint --deny-warnings && oxfmt --check .",
+        "report": "oxlint --deny-warnings",
+        "reset:turbo": "turbo run clean",
+        "reset:dist": "pnpm -r --parallel exec rimraf dist .turbo",
+        "reset:modules": "pnpm -r --parallel exec rimraf node_modules && rimraf node_modules .turbo",
+        "reset": "pnpm reset:dist && pnpm reset:modules",
+        "pkg:init": "pnpm test:ci && changeset",
+        "pkg:version": "changeset version",
+        "pkg:publish": "changeset publish",
+        "pre-commit": "lint-staged"
+    },
+    "packageManager": "pnpm@10.20.0",
+    "devDependencies": {
+        "@arethetypeswrong/cli": "0.18.5",
+        "@changesets/cli": "2.29.7",
+        "@freestylejs/config": "1.5.0",
+        "@types/node": "24.10.0",
+        "@vitest/coverage-v8": "5.0.5",
+        "husky": "9.1.7",
+        "lint-staged": "16.2.6",
+        "oxfmt": "0.73.0",
+        "oxlint": "1.88.0",
+        "publint": "0.3.25",
+        "rimraf": "6.1.0",
+        "tsdown": "0.23.1",
+        "turbo": "2.6.0",
+        "typescript": "7.0.2",
+        "vite": "8.3.4",
+        "vitest": "5.0.5"
+    }
+}

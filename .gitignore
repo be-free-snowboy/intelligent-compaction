@@ -1,0 +1,52 @@
+# Local
+*.local
+.trace/
+
+# Build
+dist
+.turbo
+benchmark
+content
+.obsidian
+.vite
+output.css
+
+# Dependencies
+node_modules/
+.pnp
+.pnp.js
+
+# Development
+.devcontainer
+
+# Testing
+coverage
+ts-perf
+tsconfig.tsbuildinfo
+__snapshots__
+large.*
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Environment variables
+.env
+.env.production
+
+# Build output
+dist/
+.astro/
+.store/
+
+# Editor
+!.vscode/extensions.json
+.idea
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?

@@ -1,0 +1,44 @@
+name: Release
+
+on:
+    push:
+        branches: [main]
+
+concurrency:
+    group: release-${{ github.ref }}
+    cancel-in-progress: false
+
+permissions:
+    contents: write
+    pull-requests: write
+
+jobs:
+    release:
+        runs-on: ubuntu-latest
+        timeout-minutes: 15
+        env:
+            NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+        steps:
+            - uses: actions/checkout@v7
+            - uses: pnpm/action-setup@v6
+              with:
+                  version: 10.20.0
+            - uses: actions/setup-node@v7
+              with:
+                  node-version-file: .nvmrc
+                  cache: pnpm
+            - run: pnpm install --frozen-lockfile
+            - run: pnpm build
+            - run: pnpm ts:typecheck
+            - run: pnpm check
+            - run: pnpm test:coverage
+            - run: pnpm verify:package
+            - name: Create release PR or publish
+              if: env.NPM_TOKEN != ''
+              uses: changesets/action@v1
+              with:
+                  version: pnpm pkg:version
+                  publish: pnpm pkg:publish
+              env:
+                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+                  NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
