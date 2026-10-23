@@ -31,6 +31,7 @@ jobs:
             - run: pnpm build
             - run: pnpm ts:typecheck
             - run: pnpm check
+            - run: pnpm check:architecture
             - run: pnpm test:coverage
             - run: pnpm verify:package
             - name: Create release PR or publish

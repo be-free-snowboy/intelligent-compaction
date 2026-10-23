@@ -3,7 +3,7 @@
     "include": ["packages/**/*"],
     "compilerOptions": {
         "paths": {
-            "~/*": ["./packages/ic/src/*"]
+            "@intelligent-compact/core": ["./packages/core/src/index.ts"]
         }
     }
 }

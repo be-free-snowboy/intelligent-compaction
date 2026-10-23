@@ -57,7 +57,13 @@ importers:
         specifier: 5.0.5
         version: 5.0.5(@types/node@24.10.0)(@vitest/coverage-v8@5.0.5)(vite@8.3.4(@types/node@24.10.0)(yaml@2.9.1))
 
-  packages/ic: {}
+  packages/claude-code:
+    dependencies:
+      '@intelligent-compact/core':
+        specifier: workspace:*
+        version: link:../core
+
+  packages/core: {}
 
 packages:
 

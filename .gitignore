@@ -1,6 +1,7 @@
 # Local
 *.local
 .trace/
+packages/claude-code/.claude-plugin/types/
 
 # Build
 dist
