@@ -15,9 +15,9 @@ Include:
 
 ## Scope
 
-The repository contains private library and tooling packages. Published package
-configuration is validated in CI with `publint`, `attw`, and a packed-consumer
-contract test. Production dependency audits run with:
+The repository contains a host-agnostic core library and host-adapter packages.
+Published package configuration is validated in CI with `publint`, `attw`, and a
+packed-consumer contract test. Production dependency audits run with:
 
 ```bash
 pnpm audit --prod --audit-level=high
