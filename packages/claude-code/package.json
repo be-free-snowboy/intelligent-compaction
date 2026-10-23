@@ -1,0 +1,62 @@
+{
+    "name": "@intelligent-compact/claude-code",
+    "version": "1.0.0",
+    "description": "Claude Code Mod adapter for @intelligent-compact/core.",
+    "license": "MIT",
+    "author": "snowboy",
+    "type": "module",
+    "keywords": [
+        "intelligent-compact",
+        "claude-code",
+        "context",
+        "compaction"
+    ],
+    "sideEffects": false,
+    "private": false,
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/freestylejs/intelligent-compact.git",
+        "directory": "packages/claude-code"
+    },
+    "bugs": {
+        "url": "https://github.com/freestylejs/intelligent-compact/issues"
+    },
+    "homepage": "https://github.com/freestylejs/intelligent-compact/tree/main/packages/claude-code#readme",
+    "engines": {
+        "node": "^22.18.0 || ^24.11.0 || >=26.0.0"
+    },
+    "publishConfig": {
+        "access": "public"
+    },
+    "files": [
+        "dist",
+        "hooks",
+        "config",
+        "types",
+        ".claude-plugin"
+    ],
+    "main": "./dist/register.js",
+    "module": "./dist/register.js",
+    "types": "./dist/register.d.ts",
+    "exports": {
+        ".": {
+            "import": {
+                "types": "./dist/register.d.ts",
+                "default": "./dist/register.js"
+            },
+            "require": {
+                "types": "./dist/register.d.cts",
+                "default": "./dist/register.cjs"
+            }
+        }
+    },
+    "scripts": {
+        "build": "tsdown",
+        "build:fast": "tsdown --no-dts",
+        "dev": "tsdown --watch --sourcemap",
+        "ts:typecheck": "tsc --noEmit --skipLibCheck"
+    },
+    "dependencies": {
+        "@intelligent-compact/core": "workspace:*"
+    }
+}

@@ -1,0 +1,33 @@
+{
+    "name": "context-pilot",
+    "version": "1.0.0",
+    "description": "Host-agnostic semantic compaction controller for Claude Code, with injected policy registries and interactive Mod UI.",
+    "author": {
+        "name": "snowboy"
+    },
+    "icon": "./.claude-plugin/icon.png",
+    "types": "./types/index.d.ts",
+    "userConfig": {
+        "auto_enabled": {
+            "type": "boolean",
+            "title": "AUTO: automatic compaction",
+            "description": "ON (AUTO): probes and compactions run automatically after main-thread turns in interactive sessions. OFF (MANUAL): nothing forks or compacts automatically; /context-pilot evaluate (dry run) and /context-pilot compact remain available, and native compactions still receive the policy instructions.",
+            "required": false,
+            "default": true
+        },
+        "show_status_band": {
+            "type": "boolean",
+            "title": "Status band above the prompt",
+            "description": "Show one line above the prompt with the active policy, context fill and progress bar, controller mode, next probe, and AUTO/MANUAL. Turn it off for a quieter prompt; /context-pilot still opens the full dashboard.",
+            "required": false,
+            "default": true
+        },
+        "policy_registry_json": {
+            "type": "string",
+            "title": "Policy registry (JSON)",
+            "description": "The complete policy configuration as one JSON string (schema version 2; version 1 registries are rejected and must be re-saved as version 2). Top level: schemaVersion (must be 2), activePolicyId (must match one policy id), policies (one or more, unique ids). Each policy: id, label, thresholds {arm (earliest fill for semantic probes), mandatory (hard AUTO boundary), hostHeadroom (required distance between mandatory and the host's autocompact threshold)}, probe {minGap, maxGap (distance to the next probe), maxProbesPerCycle (integer 0..100; 0 = no probes), cacheFloor (0..1; probing pauses when the recent cache-read ratio falls below it)}, compaction {minProgress (growth required before another automatic compaction), directiveMaxChars (integer 1..8000), forkOnMandatory, injectNative (add policy instructions to native compactions), baseInstructions (non-empty)}. A threshold is {\"unit\":\"tokens\",\"value\":N} with N > 0, or {\"unit\":\"ratio\",\"value\":r} with 0 < r <= 1 of the context window. Rules checked against the live window: arm < mandatory <= window; minGap <= maxGap; minProgress < mandatory. Use /context-pilot config for the guided editor and its Help tab for the full schema.",
+            "required": false,
+            "default": "{\"schemaVersion\":2,\"activePolicyId\":\"balanced\",\"policies\":[{\"id\":\"balanced\",\"label\":\"Balanced\",\"thresholds\":{\"arm\":{\"unit\":\"ratio\",\"value\":0.325},\"mandatory\":{\"unit\":\"ratio\",\"value\":0.5},\"hostHeadroom\":{\"unit\":\"ratio\",\"value\":0.1}},\"probe\":{\"minGap\":{\"unit\":\"tokens\",\"value\":15000},\"maxGap\":{\"unit\":\"tokens\",\"value\":50000},\"maxProbesPerCycle\":5,\"cacheFloor\":0.7},\"compaction\":{\"minProgress\":{\"unit\":\"ratio\",\"value\":0.15},\"directiveMaxChars\":1800,\"forkOnMandatory\":true,\"injectNative\":true,\"baseInstructions\":\"Write a continuation summary that preserves working state, not history. (1) Ledger: copy the Decisions, Constraints and Ruled-out sections of any earlier summary verbatim, then append new entries. (2) Quote the user's explicit instructions and corrections verbatim. (3) Keep exact error messages, commands, identifiers and file paths verbatim; point to file contents by path and line range instead of copying them. (4) Record in-flight state: objective and acceptance criteria, active hypothesis, last command and its result, unfinished edits, test status, and the exact next step. (5) Drop stale tool output. Keep the summary under 30k tokens.\"}},{\"id\":\"economy\",\"label\":\"Economy\",\"thresholds\":{\"arm\":{\"unit\":\"ratio\",\"value\":0.2},\"mandatory\":{\"unit\":\"ratio\",\"value\":0.4},\"hostHeadroom\":{\"unit\":\"ratio\",\"value\":0.1}},\"probe\":{\"minGap\":{\"unit\":\"tokens\",\"value\":15000},\"maxGap\":{\"unit\":\"tokens\",\"value\":50000},\"maxProbesPerCycle\":5,\"cacheFloor\":0.7},\"compaction\":{\"minProgress\":{\"unit\":\"ratio\",\"value\":0.15},\"directiveMaxChars\":1800,\"forkOnMandatory\":true,\"injectNative\":true,\"baseInstructions\":\"Write a continuation summary that preserves working state, not history. (1) Ledger: copy the Decisions, Constraints and Ruled-out sections of any earlier summary verbatim, then append new entries. (2) Quote the user's explicit instructions and corrections verbatim. (3) Keep exact error messages, commands, identifiers and file paths verbatim; point to file contents by path and line range instead of copying them. (4) Record in-flight state: objective and acceptance criteria, active hypothesis, last command and its result, unfinished edits, test status, and the exact next step. (5) Drop stale tool output. Keep the summary under 30k tokens.\"}},{\"id\":\"small-window\",\"label\":\"Small window (~200k)\",\"thresholds\":{\"arm\":{\"unit\":\"ratio\",\"value\":0.5},\"mandatory\":{\"unit\":\"ratio\",\"value\":0.7},\"hostHeadroom\":{\"unit\":\"ratio\",\"value\":0.1}},\"probe\":{\"minGap\":{\"unit\":\"tokens\",\"value\":15000},\"maxGap\":{\"unit\":\"tokens\",\"value\":50000},\"maxProbesPerCycle\":5,\"cacheFloor\":0.7},\"compaction\":{\"minProgress\":{\"unit\":\"ratio\",\"value\":0.15},\"directiveMaxChars\":1800,\"forkOnMandatory\":true,\"injectNative\":true,\"baseInstructions\":\"Write a continuation summary that preserves working state, not history. (1) Ledger: copy the Decisions, Constraints and Ruled-out sections of any earlier summary verbatim, then append new entries. (2) Quote the user's explicit instructions and corrections verbatim. (3) Keep exact error messages, commands, identifiers and file paths verbatim; point to file contents by path and line range instead of copying them. (4) Record in-flight state: objective and acceptance criteria, active hypothesis, last command and its result, unfinished edits, test status, and the exact next step. (5) Drop stale tool output. Keep the summary under 30k tokens.\"}}]}"
+        }
+    }
+}

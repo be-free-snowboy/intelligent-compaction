@@ -1,0 +1,14 @@
+{
+    "name": "intelligent-compact",
+    "owner": {
+        "name": "snowboy"
+    },
+    "description": "Local development marketplace for intelligent-compact.",
+    "plugins": [
+        {
+            "name": "context-pilot",
+            "source": "./packages/claude-code",
+            "description": "Policy-driven semantic compaction controller for Claude Code."
+        }
+    ]
+}

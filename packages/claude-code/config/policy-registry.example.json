@@ -1,0 +1,126 @@
+{
+    "schemaVersion": 2,
+    "activePolicyId": "balanced",
+    "policies": [
+        {
+            "id": "balanced",
+            "label": "Balanced",
+            "thresholds": {
+                "arm": {
+                    "unit": "ratio",
+                    "value": 0.325
+                },
+                "mandatory": {
+                    "unit": "ratio",
+                    "value": 0.5
+                },
+                "hostHeadroom": {
+                    "unit": "ratio",
+                    "value": 0.1
+                }
+            },
+            "probe": {
+                "minGap": {
+                    "unit": "tokens",
+                    "value": 15000
+                },
+                "maxGap": {
+                    "unit": "tokens",
+                    "value": 50000
+                },
+                "maxProbesPerCycle": 5,
+                "cacheFloor": 0.7
+            },
+            "compaction": {
+                "minProgress": {
+                    "unit": "ratio",
+                    "value": 0.15
+                },
+                "directiveMaxChars": 1800,
+                "forkOnMandatory": true,
+                "injectNative": true,
+                "baseInstructions": "Write a continuation summary that preserves working state, not history. (1) Ledger: copy the Decisions, Constraints and Ruled-out sections of any earlier summary verbatim, then append new entries. (2) Quote the user's explicit instructions and corrections verbatim. (3) Keep exact error messages, commands, identifiers and file paths verbatim; point to file contents by path and line range instead of copying them. (4) Record in-flight state: objective and acceptance criteria, active hypothesis, last command and its result, unfinished edits, test status, and the exact next step. (5) Drop stale tool output. Keep the summary under 30k tokens."
+            }
+        },
+        {
+            "id": "economy",
+            "label": "Economy",
+            "thresholds": {
+                "arm": {
+                    "unit": "ratio",
+                    "value": 0.2
+                },
+                "mandatory": {
+                    "unit": "ratio",
+                    "value": 0.4
+                },
+                "hostHeadroom": {
+                    "unit": "ratio",
+                    "value": 0.1
+                }
+            },
+            "probe": {
+                "minGap": {
+                    "unit": "tokens",
+                    "value": 15000
+                },
+                "maxGap": {
+                    "unit": "tokens",
+                    "value": 50000
+                },
+                "maxProbesPerCycle": 5,
+                "cacheFloor": 0.7
+            },
+            "compaction": {
+                "minProgress": {
+                    "unit": "ratio",
+                    "value": 0.15
+                },
+                "directiveMaxChars": 1800,
+                "forkOnMandatory": true,
+                "injectNative": true,
+                "baseInstructions": "Write a continuation summary that preserves working state, not history. (1) Ledger: copy the Decisions, Constraints and Ruled-out sections of any earlier summary verbatim, then append new entries. (2) Quote the user's explicit instructions and corrections verbatim. (3) Keep exact error messages, commands, identifiers and file paths verbatim; point to file contents by path and line range instead of copying them. (4) Record in-flight state: objective and acceptance criteria, active hypothesis, last command and its result, unfinished edits, test status, and the exact next step. (5) Drop stale tool output. Keep the summary under 30k tokens."
+            }
+        },
+        {
+            "id": "small-window",
+            "label": "Small window (~200k)",
+            "thresholds": {
+                "arm": {
+                    "unit": "ratio",
+                    "value": 0.5
+                },
+                "mandatory": {
+                    "unit": "ratio",
+                    "value": 0.7
+                },
+                "hostHeadroom": {
+                    "unit": "ratio",
+                    "value": 0.1
+                }
+            },
+            "probe": {
+                "minGap": {
+                    "unit": "tokens",
+                    "value": 15000
+                },
+                "maxGap": {
+                    "unit": "tokens",
+                    "value": 50000
+                },
+                "maxProbesPerCycle": 5,
+                "cacheFloor": 0.7
+            },
+            "compaction": {
+                "minProgress": {
+                    "unit": "ratio",
+                    "value": 0.15
+                },
+                "directiveMaxChars": 1800,
+                "forkOnMandatory": true,
+                "injectNative": true,
+                "baseInstructions": "Write a continuation summary that preserves working state, not history. (1) Ledger: copy the Decisions, Constraints and Ruled-out sections of any earlier summary verbatim, then append new entries. (2) Quote the user's explicit instructions and corrections verbatim. (3) Keep exact error messages, commands, identifiers and file paths verbatim; point to file contents by path and line range instead of copying them. (4) Record in-flight state: objective and acceptance criteria, active hypothesis, last command and its result, unfinished edits, test status, and the exact next step. (5) Drop stale tool output. Keep the summary under 30k tokens."
+            }
+        }
+    ]
+}
