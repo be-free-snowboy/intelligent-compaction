@@ -36,7 +36,7 @@ jobs:
             - run: pnpm verify:package
             - name: Create release PR or publish
               if: env.NPM_TOKEN != ''
-              uses: changesets/action@v1
+              uses: changesets/action@v2
               with:
                   version: pnpm pkg:version
                   publish: pnpm pkg:publish
